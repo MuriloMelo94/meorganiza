@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Revenue;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -27,9 +28,15 @@ class RevenueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'revenueTittle' => 'required|string|max:255'
+        ]);
+
+        $request->user()->revenues()->create($validated);
+
+        return redirect(route('revenues.index'));
     }
 
     /**
