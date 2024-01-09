@@ -10,6 +10,8 @@ class Revenue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'revenueTittle',
+        'revenue_title',
+        'revenue_amount',
+        'revenue_payday',
     ];
 }

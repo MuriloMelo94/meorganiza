@@ -31,7 +31,9 @@ class RevenueController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'revenueTittle' => 'required|string|max:255'
+            'revenue_title' => 'required|string|max:255',
+            'revenue_amount' => 'required|numeric',
+            'revenue_payday'=> 'required|date'
         ]);
 
         $request->user()->revenues()->create($validated);

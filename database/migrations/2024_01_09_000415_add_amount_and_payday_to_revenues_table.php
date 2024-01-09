@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('revenues', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('revenue_title');
-            $table->timestamps();
+        Schema::table('revenues', function (Blueprint $table) {
+            $table->bigInteger('revenue_amount');
+            $table->date('revenue_payday')->default(now());
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('revenues');
+        Schema::table('revenues', function (Blueprint $table) {
+            $table->bigInteger('revenue_amount');
+            $table->date('revenue_payday')->default(now());
+        });
     }
 };
